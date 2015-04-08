@@ -1,0 +1,13 @@
+# Bash
+alias ..="cd .."
+alias ls="command ls -FG"
+
+# Git
+alias st="git status"
+alias log="git log --pretty=oneline --abbrev-commit --graph --decorate --all"
+alias co="git checkout"
+alias branch="git branch"
+alias gpom="git pull origin master"
+
+# Rails
+alias b="bundle exec"
