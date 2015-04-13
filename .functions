@@ -1,0 +1,4 @@
+# Find and replace
+gsub() {
+  ack -l ${1} | xargs perl -i -p -e "s/${1}/${2}/g"
+}
