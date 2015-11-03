@@ -1,0 +1,8 @@
+alias ..="cd .."
+alias ls="command ls -FG"
+alias b="bundle exec"
+
+# Git
+alias st="git status"
+alias log="git log --pretty=oneline --abbrev-commit --graph --decorate --all"
+alias co="git checkout"
