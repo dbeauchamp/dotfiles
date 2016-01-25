@@ -1,5 +1,5 @@
 # Load the shell dotfiles
-for file in ~/dotfiles/.{aliases,functions}; do
+for file in ~/dotfiles/.{aliases,functions,bash_prompt}; do
   [ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
 unset file
@@ -34,4 +34,4 @@ shopt -s cdspell
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
 
-ulimit -n 10000
+ulimit -n 1000

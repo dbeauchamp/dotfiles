@@ -6,3 +6,7 @@ alias b="bundle exec"
 alias st="git status"
 alias log="git log --pretty=oneline --abbrev-commit --graph --decorate --all"
 alias co="git checkout"
+alias branch="git branch"
+alias gpom="git pull origin master"
+
+alias b="bundle exec"
