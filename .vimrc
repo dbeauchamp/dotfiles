@@ -1,12 +1,11 @@
 " Vim basics
-" ~~~~~~~~~~
+" ==========
 set nocompatible
 set encoding=utf-8
-set t_Co=256
 
 " Enable vim-plug
 " ===============
-call plug#begin()
+call plug#begin('~/.vim/plugged')
 
 " Plugins
 " =======
@@ -14,7 +13,6 @@ call plug#begin()
 " VCS
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'bruno-/vim-husk'
 
 " System
 Plug 'rking/ag.vim', {'on': 'Ag'}
@@ -26,9 +24,10 @@ Plug 'ervandew/supertab'
 Plug 'bling/vim-airline'
 Plug 'benekastah/neomake'
 Plug 'scrooloose/nerdtree'
-Plug 'moll/vim-bbye'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'SirVer/ultisnips'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'blueyed/vim-diminactive'
-Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " Plain Text
 Plug 'reedes/vim-pencil', {'for': ['text']}
@@ -40,11 +39,10 @@ Plug 'othree/html5.vim', {'for': ['html']}
 Plug 'vim-scripts/HTML-AutoCloseTag', {'for': ['html']}
 Plug 'kchmck/vim-coffee-script', {'for': ['coffee']}
 Plug 'toadums/vim-cjsx', {'for': ['coffee']}
-Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript', {'for': ['javascript', 'haml']}
 Plug 'mxw/vim-jsx', {'for': ['javascript']}
 Plug 'cakebaker/scss-syntax.vim', {'for': ['scss', 'sass', 'haml']}
-Plug 'digitaltoad/vim-jade'
+Plug 'digitaltoad/vim-jade', {'for': ['jade', 'pug']}
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
@@ -52,21 +50,26 @@ Plug 'tpope/vim-rails', {'for': 'ruby'}
 Plug 'tpope/vim-endwise', {'for': 'ruby'}
 
 " Themes
-Plug 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
+" Plug 'w0ng/vim-hybrid'
+Plug 'junegunn/seoul256.vim'
+Plug 'junegunn/vim-emoji'
 
-Plug 'ervandew/supertab'
-Plug 'godlygeek/tabular'
-Plug 'sheerun/vim-polyglot'
-Plug 'sjl/gundo.vim'
+" Colors
+Plug 'tomasr/molokai'
+Plug 'chriskempson/vim-tomorrow-theme'
 
 " End vim-plug
 " ============
-
 call plug#end()
 
 " Display Settings
 " ================
 syntax enable
+set background=dark
+
+" Color Scheme
+color seoul256
 
 if has('nvim')
   nmap <bs> <c-w>h
@@ -92,7 +95,7 @@ set splitright                  " Opens vertical split right of current window
 set splitbelow                  " Opens horizontal split below current window
 set re=1                        " Uses the first regex version, major speedup
 let g:jsx_ext_required = 0      " Allow JSX in normal JS file
-let g:diminactive_enable_focus = 1
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " Trim trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -112,6 +115,7 @@ set viminfo='100,f1  " Save up to 100 marks, enable capital marks
 filetype plugin on
 filetype indent on
 set autoindent
+set copyindent
 set smartindent
 set smarttab
 set shiftwidth=2
@@ -203,32 +207,18 @@ vnoremap > >gv
 " Clear last search
 nnoremap <space> :set hlsearch! hlsearch?<CR>
 
-" Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! %!sudo tee > /dev/null %
-
 " Add some other bindings from files to languages
 autocmd! BufRead,BufNewFile *.jbuilder,Gemfile,Rakefile,Procfile,Guardfile setf ruby
-au BufRead,BufNewFile *.thor set filetype=ruby
 au BufRead,BufNewFile Guardfile set filetype=ruby
 au BufRead,BufNewFile */nginx/*.conf set filetype=nginx
 au BufRead,BufNewFile *.jbuilder setf ruby
-au BufRead,BufNewFile *.jeco setf html
-au BufRead,BufNewFile *.jss set filetype=css
-au BufRead,BufNewFile *.hbs set filetype=mustache
 au BufRead,BufNewFile *.md set filetype=markdown
-autocmd! BufWritePost,BufEnter * Neomake
 
 " linters
+autocmd! BufWritePost * Neomake
 let g:neomake_ruby_enabled_makers = ['rubocop']
-let g:neomake_coffeescript_enabled_makers = ['coffeelint']
 let g:neomake_javascript_enabled_makers = ['eslint']
-
-" Colorscheme
-" ===========
-let g:hybrid_use_Xresources = 1
-let base16colorspace=256
-silent! colorscheme Tomorrow-Night
-set background=dark
+let g:neomake_javascript_eslint_exe = $PWD .'/node_modules/.bin/eslint'
 
 " Airline
 " =======
@@ -258,11 +248,14 @@ if executable('ag')
   nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 endif
 
-" <Ctrl-l> redraws the screen and removes any search highlighting.
-nnoremap <silent> <C-l> :nohl<CR><C-l>
-
-" bind \ (backward slash) to grep shortcut
-nnoremap \ :Ag<SPACE>
+" UltiSnips
+" =========
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsUsePythonVersion = 2
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 
 " Don't let nerdtree open by default when opening a folder.
 let g:NERDTreeHijackNetrw=0
@@ -277,14 +270,16 @@ ino jk <esc>
 cno jk <esc>
 vno v <esc>
 
-" Easier start & end of line.
-noremap H ^
-nnoremap L $
-vnoremap L $h
+"keybindings for easier switching between splits
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" bind \ (backward slash) to grep shortcut
+nnoremap \ :Ag<SPACE>
 
 " easily kill the current buffer
-nnoremap <leader>k  :Bdelete<CR>
-nnoremap <leader>K  :bd<CR>
+nnoremap <leader>k :bd<CR>
+nnoremap <leader>K :bd!<CR>
 nnoremap <leader>d :vsp %:h/
-nnoremap <leader>` :NERDTreeFind<CR>
-
