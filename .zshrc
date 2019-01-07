@@ -1,10 +1,10 @@
-# If you come from bash you might have to change your $PATH.
+f you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/davidbeauchamp/.oh-my-zsh
 
-ZSH_THEME="miloshadzic"
+ZSH_THEME="robbyrussell"
 
 DISABLE_AUTO_UPDATE="true"
 
@@ -28,14 +28,14 @@ export PATH=$HOME/.rbenv/shims/gem:$PATH
 # rails
 export RAILS_ENV=development
 
-# go shit
+# go
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
 export GOPATH=~/workspace/go
 
 export PGDATA=~/pgdata
 
-# NVM shit
+# NVM
 export NVM_DIR="/Users/davidbeauchamp/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
@@ -46,12 +46,17 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 export DISABLE_AUTO_TITLE='true'
 
 autoload -U promptinit; promptinit
+prompt pure
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 #~~~~~ALIASES~~~~~
 alias ..="cd .."
+alias ...="cd ../.."
 alias ls="ls -GFA"
+
+# tmux
+alias kill-session="tmux kill-session -t"
 
 # Git
 alias st="git status -sb"
@@ -66,3 +71,4 @@ alias b="bundle exec"
 # nvim all the way
 alias vi="nvim"
 alias vim="nvim"
+

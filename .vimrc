@@ -12,7 +12,6 @@ call plug#begin('~/.vim/plugged')
 
 " VCS
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
 
 " System
 Plug 'rking/ag.vim', {'on': 'Ag'}
@@ -21,13 +20,15 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'benekastah/neomake'
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'SirVer/ultisnips'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'blueyed/vim-diminactive'
+" Plug 'roman/golden-ratio'
 
 " Plain Text
 Plug 'reedes/vim-pencil', {'for': ['text']}
@@ -35,14 +36,15 @@ Plug 'junegunn/goyo.vim', {'for': ['text']}
 Plug 'amix/vim-zenroom2', {'for': ['text']}
 
 " Syntaxes
-Plug 'othree/html5.vim', {'for': ['html']}
-Plug 'vim-scripts/HTML-AutoCloseTag', {'for': ['html']}
-Plug 'kchmck/vim-coffee-script', {'for': ['coffee']}
-Plug 'toadums/vim-cjsx', {'for': ['coffee']}
-Plug 'pangloss/vim-javascript', {'for': ['javascript', 'haml']}
-Plug 'mxw/vim-jsx', {'for': ['javascript']}
-Plug 'cakebaker/scss-syntax.vim', {'for': ['scss', 'sass', 'haml']}
+Plug 'alvan/vim-closetag'
+Plug 'kchmck/vim-coffee-script'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'cakebaker/scss-syntax.vim'
 Plug 'digitaltoad/vim-jade', {'for': ['jade', 'pug']}
+
+" Golang
+Plug 'fatih/vim-go'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
@@ -50,10 +52,9 @@ Plug 'tpope/vim-rails', {'for': 'ruby'}
 Plug 'tpope/vim-endwise', {'for': 'ruby'}
 
 " Themes
-" Plug 'flazz/vim-colorschemes'
-" Plug 'w0ng/vim-hybrid'
 Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/vim-emoji'
+Plug 'chriskempson/base16-vim'
 
 " Colors
 Plug 'tomasr/molokai'
@@ -69,14 +70,21 @@ syntax enable
 set background=dark
 
 " Color Scheme
-color seoul256
+" let g:seoul256_background = 235
+" color seoul256
+colorscheme base16-default-dark
+
+" let g:seoul256_light_background = 256
+" color seoul256-light
+
+highlight link xmlEndTag xmlTag
 
 if has('nvim')
   nmap <bs> <c-w>h
 endif
 
 " Disable netrw
-let g:loaded_netrw       = 1
+let g:loaded_netrw= 1
 let g:loaded_netrwPlugin = 1
 
 " General Config
@@ -95,6 +103,7 @@ set splitright                  " Opens vertical split right of current window
 set splitbelow                  " Opens horizontal split below current window
 set re=1                        " Uses the first regex version, major speedup
 let g:jsx_ext_required = 0      " Allow JSX in normal JS file
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.js"
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " Trim trailing whitespace on save
@@ -128,6 +137,9 @@ set nowrap                            " Don't wrap lines
 set linebreak                         " Wrap lines at convenient points
 set cursorline
 set ttyfast
+
+"Go
+autocmd Filetype go setlocal ts=4 sw=4 sts=0 expandtab
 
 " Turn Off Swap Files
 " ===================
@@ -172,7 +184,6 @@ map  <left>  <nop>
 map  <right> <nop>
 map  <up>    <nop>
 
-set noesckeys
 set ttimeout
 set ttimeoutlen=1
 
@@ -192,7 +203,7 @@ nnoremap Y y$
 
 " Select the text that was last edited/pasted.
 " http://vimcasts.org/episodes/bubbling-text/
-nmap gV `[v`]
+nmap V `[v`]
 
 " Visual find/replace
 vnoremap <C-r> "hy:%s/<C-r>h//g<left><left>
@@ -241,6 +252,7 @@ let g:ctrlp_show_hidden = 1
 let g:ctrlp_match_window = 'bottom,max:40'
 let g:ctrlp_mruf_relative = 1
 let g:ctrlp_user_command = 'ag %s -l -g ""'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_store'
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor " Use ag over grep
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""' " Use ag in CtrlP
@@ -250,8 +262,8 @@ endif
 
 " UltiSnips
 " =========
+let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsUsePythonVersion = 2
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -283,3 +295,4 @@ nnoremap \ :Ag<SPACE>
 nnoremap <leader>k :bd<CR>
 nnoremap <leader>K :bd!<CR>
 nnoremap <leader>d :vsp %:h/
+
