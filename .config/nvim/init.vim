@@ -34,6 +34,7 @@ set completeopt=menuone,noinsert,noselect
 set cmdheight=2
 set updatetime=50
 set cursorline
+set guicursor=
 set termguicolors
 
 call plug#begin('~/.vim/plugged')
@@ -51,6 +52,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'romgrk/nvim-treesitter-context'
 
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-fugitive'
@@ -62,6 +64,7 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 let mapleader=' '
 
 " Telescope
+nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
 nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 nnoremap <Leader>pf :lua require('telescope.builtin').find_files({ hidden = true, ignore = true, find_command = rg })<CR>
 nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
@@ -76,8 +79,6 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
 
-lua require("theprimeagen")
-lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
 if executable('rg')
     let g:rg_derive_root='true'
 endif
@@ -107,3 +108,6 @@ nnoremap <leader>s  :w<CR>
 ino jk <esc>
 cno jk <esc>
 vno v <esc>
+
+autocmd FileType typescript setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
