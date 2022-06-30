@@ -39,6 +39,7 @@ set termguicolors
 
 call plug#begin('~/.vim/plugged')
 Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
@@ -62,6 +63,8 @@ colorscheme gruvbox
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 let mapleader=' '
+
+lua require('config')
 
 " Telescope
 nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
