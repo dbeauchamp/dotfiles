@@ -20,9 +20,9 @@ set hidden
 set noerrorbells
 set nowrap
 set noswapfile
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set expandtab
 set smartindent
 set undodir=~/.vim/undodir
@@ -54,6 +54,8 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'romgrk/nvim-treesitter-context'
+
+Plug 'tpope/vim-commentary'
 
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-fugitive'
@@ -112,5 +114,4 @@ ino jk <esc>
 cno jk <esc>
 vno v <esc>
 
-autocmd FileType typescript setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType rust setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
