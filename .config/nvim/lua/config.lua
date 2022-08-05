@@ -1,6 +1,17 @@
 require('lsp')
 require('keybindings')
 
+local opts = {
+  tools = {
+    autoSetHints = true,
+    inlay_hints = {
+      only_current_line = true,
+    }
+  }
+}
+
+require('rust-tools').setup(opts)
+
 local configs = require('nvim-treesitter.configs')
 configs.setup = {
     ensure_installed = "maintained",
@@ -15,7 +26,7 @@ configs.setup = {
     },
     textobjects = { enable = true }
 }
-require('telescope').setup{  defaults = { file_ignore_patterns = { "node_modules" }} }
+require('telescope').setup{  defaults = { file_ignore_patterns = { "node_modules", ".git" }} }
 
 local cmp = require('cmp')
 cmp.setup({

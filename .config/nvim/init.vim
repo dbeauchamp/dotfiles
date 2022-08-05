@@ -57,6 +57,7 @@ Plug 'romgrk/nvim-treesitter-context'
 
 Plug 'tpope/vim-commentary'
 
+Plug 'simrat39/rust-tools.nvim'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-fugitive'
 call plug#end()
@@ -70,9 +71,9 @@ lua require('config')
 
 " Telescope
 nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
-nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+nnoremap <leader>ps :lua require('telescope.builtin').live_grep()<CR>
 nnoremap <Leader>pf :lua require('telescope.builtin').find_files({ hidden = true, ignore = true, find_command = rg })<CR>
-nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
+nnoremap <leader>pw :lua require('telescope.builtin').grep_string({ search = vim.fn.expand("<cword>") })<CR>
 nnoremap <leader>pb :lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>vh :lua require('telescope.builtin').help_tags()<CR>
 
@@ -87,6 +88,14 @@ let g:netrw_winsize = 25
 if executable('rg')
     let g:rg_derive_root='true'
 endif
+
+" easier explore
+nnoremap <leader>f :Ex<CR>
+
+" Easier start & end of line.
+noremap H ^
+nnoremap L $
+vnoremap L $h
 
 " Reselect visual block after indent/outdent
 vnoremap < <gv
