@@ -46,6 +46,9 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'onsails/lspkind-nvim'
 Plug 'nvim-lua/lsp_extensions.nvim'
+Plug 'hrsh7th/cmp-vsnip', {'branch': 'main'}
+Plug 'hrsh7th/vim-vsnip'
+
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -54,6 +57,7 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'romgrk/nvim-treesitter-context'
+Plug 'ThePrimeagen/harpoon'
 
 Plug 'tpope/vim-commentary'
 
@@ -68,14 +72,6 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 let mapleader=' '
 
 lua require('config')
-
-" Telescope
-nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
-nnoremap <leader>ps :lua require('telescope.builtin').live_grep()<CR>
-nnoremap <Leader>pf :lua require('telescope.builtin').find_files({ hidden = true, ignore = true, find_command = rg })<CR>
-nnoremap <leader>pw :lua require('telescope.builtin').grep_string({ search = vim.fn.expand("<cword>") })<CR>
-nnoremap <leader>pb :lua require('telescope.builtin').buffers()<CR>
-nnoremap <leader>vh :lua require('telescope.builtin').help_tags()<CR>
 
 " Trim trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
