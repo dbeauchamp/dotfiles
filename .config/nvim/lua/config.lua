@@ -103,3 +103,12 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 require('lspconfig')['sumneko_lua'].setup {
     capabilities = capabilities
 }
+
+-- lualine
+require('lualine').setup({
+  options = {
+    theme = 'auto',
+  },
+})
+
+require('nvim-web-devicons').setup()
