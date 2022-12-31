@@ -10,6 +10,12 @@ return require("packer").startup(function(use)
   use("nvim-telescope/telescope.nvim")
   use("ThePrimeagen/harpoon")
   use("gruvbox-community/gruvbox")
+  -- use({
+  --   "rose-pine/neovim",
+  --   as = "rose-pine",
+  -- })
+  use({ "catppuccin/nvim", as = "catppuccin" })
+  -- use({ "kabouzeid/nvim-jellybeans", requires = "rktjmp/lush.nvim" })
   use("nvim-treesitter/nvim-treesitter", {
     run = ":TSUpdate"
   })
@@ -20,10 +26,9 @@ return require("packer").startup(function(use)
   use("tpope/vim-fugitive")
   use("tpope/vim-commentary")
   use('mbbill/undotree')
-  use('tpope/vim-fugitive')
   use("github/copilot.vim")
 
-  use {
+  use({
     'VonHeikemen/lsp-zero.nvim',
     requires = {
       -- LSP Support
@@ -43,5 +48,5 @@ return require("packer").startup(function(use)
       {'L3MON4D3/LuaSnip'},
       {'rafamadriz/friendly-snippets'},
     }
-  }
+  })
 end)
