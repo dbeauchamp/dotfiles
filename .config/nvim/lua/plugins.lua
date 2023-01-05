@@ -10,12 +10,9 @@ return require("packer").startup(function(use)
   use("nvim-telescope/telescope.nvim")
   use("ThePrimeagen/harpoon")
   use("gruvbox-community/gruvbox")
-  -- use({
-  --   "rose-pine/neovim",
-  --   as = "rose-pine",
-  -- })
+  use({ "rose-pine/neovim", as = "rose-pine" })
   use({ "catppuccin/nvim", as = "catppuccin" })
-  -- use({ "kabouzeid/nvim-jellybeans", requires = "rktjmp/lush.nvim" })
+  use({ "kabouzeid/nvim-jellybeans", requires = "rktjmp/lush.nvim" })
   use("nvim-treesitter/nvim-treesitter", {
     run = ":TSUpdate"
   })
