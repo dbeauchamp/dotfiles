@@ -46,4 +46,7 @@ return require("packer").startup(function(use)
       {'rafamadriz/friendly-snippets'},
     }
   })
+
+  -- local dev
+  use("/home/davidbeauchamp/workspace/orderbook.nvim")
 end)
