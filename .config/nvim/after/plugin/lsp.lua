@@ -26,7 +26,13 @@ cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
 lsp.set_preferences({
-  sign_icons = { }
+  suggest_lsp_servers = false,
+  sign_icons = {
+    error = 'E',
+    warn = 'W',
+    hint = 'H',
+    info = 'I'
+  }
 })
 
 lsp.setup_nvim_cmp({
@@ -43,8 +49,12 @@ lsp.on_attach(function(client, bufnr)
   keymap("n", "gw", function() vim.lsp.buf.workspace_symbol() end, opts)
   keymap("n", "<c-k>", function() vim.lsp.buf.signature_help() end, opts)
   keymap("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
-  keymap("n", "<leader>af", function() vim.lsp.buf.code_action() end, opts)
+  keymap("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
   keymap("n", "gr", function() vim.lsp.buf.references() end, opts)
 end)
 
 lsp.setup()
+
+vim.diagnostic.config({
+  virtual_text = true,
+})

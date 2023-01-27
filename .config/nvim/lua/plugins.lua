@@ -16,17 +16,20 @@ return require("packer").startup(function(use)
   use("nvim-treesitter/nvim-treesitter", {
     run = ":TSUpdate"
   })
+  use("nvim-treesitter/nvim-treesitter-context")
   use({
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    "nvim-lualine/lualine.nvim",
+    requires = { "kyazdani42/nvim-web-devicons", opt = true }
   })
   use("tpope/vim-fugitive")
   use("tpope/vim-commentary")
-  use('mbbill/undotree')
+  use("mbbill/undotree")
+  use("sbdchd/neoformat")
   use("github/copilot.vim")
 
   use({
     'VonHeikemen/lsp-zero.nvim',
+    branch = 'v1.x',
     requires = {
       -- LSP Support
       {'neovim/nvim-lspconfig'},
