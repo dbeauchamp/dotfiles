@@ -51,5 +51,5 @@ return require("packer").startup(function(use)
   })
 
   -- local dev
-  use("/home/davidbeauchamp/workspace/orderbook.nvim")
+  -- use("/home/davidbeauchamp/workspace/orderbook.nvim")
 end)
