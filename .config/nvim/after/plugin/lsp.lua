@@ -51,6 +51,11 @@ lsp.on_attach(function(client, bufnr)
   keymap("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
   keymap("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
   keymap("n", "gr", function() vim.lsp.buf.references() end, opts)
+
+  -- Create a command `:Format` local to the LSP buffer
+  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+    vim.lsp.buf.format()
+  end, { desc = 'Format current buffer with LSP' })
 end)
 
 lsp.setup()
