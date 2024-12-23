@@ -1,4 +1,4 @@
-require("config")
+require("config.lazy")
 
 local autocmd = vim.api.nvim_create_autocmd
 local mygroup = vim.api.nvim_create_augroup("DBGroup", {})
